@@ -30,9 +30,9 @@ public class AssociadoServiceImpl implements AssociadoService{
 	}
 
 	@Override
-	public Associado create() {
-		// TODO Auto-generated method stub
-		return null;
+	public Associado create(Associado associado) { 
+		this.associadoRepository.save(associado);
+		return associado;
 	}
 
 }

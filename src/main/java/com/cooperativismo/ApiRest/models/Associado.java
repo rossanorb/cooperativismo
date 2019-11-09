@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 public class Associado {
@@ -20,8 +24,13 @@ public class Associado {
 		this.id = id;
 	}
 
+	@NotEmpty(message = "Campo nome é obrigatório")
+	@NotBlank(message = "Campo nome não pode estar vazio")
 	private String nome;
-
+	
+	@NotEmpty(message = "Campo cpf é obrigatório")
+	@NotBlank(message = "Campo cpf não pode estar vazio")
+	@CPF(message = "CPF é invalido")
 	private String cpf;
 
 	public String getNome() {
