@@ -25,10 +25,6 @@ import com.cooperativismo.ApiRest.models.Associado;
 import com.cooperativismo.ApiRest.services.AssociadoService;
 
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-
 @RestController
 @RequestMapping("/v1/associados")
 public class AssociadoResource {
@@ -61,11 +57,6 @@ public class AssociadoResource {
 			Associado associadoCreated = this.associadoService.create(associado);
 			return new ResponseEntity<Associado>(associadoCreated, HttpStatus.CREATED);
 		}
-		
-		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = new Date();
-		System.out.println(formatter.format(date));
 		
 		return ResponseEntity
 				.badRequest()
