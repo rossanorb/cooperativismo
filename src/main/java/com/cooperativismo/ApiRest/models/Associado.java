@@ -1,11 +1,13 @@
 package com.cooperativismo.ApiRest.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -26,11 +28,15 @@ public class Associado {
 
 	@NotEmpty(message = "Campo nome é obrigatório")
 	@NotBlank(message = "Campo nome não pode estar vazio")
+	@Size(max = 45, message = "Campo título excedeu limite de 45 caracteres")
+	@Column(length = 45, nullable = false)
 	private String nome;
 	
 	@NotEmpty(message = "Campo cpf é obrigatório")
 	@NotBlank(message = "Campo cpf não pode estar vazio")
 	@CPF(message = "CPF é invalido")
+	@Size(max = 20, message = "Campo cpf excedeu limite de 20 caracteres")
+	@Column(length = 20, nullable = false)
 	private String cpf;
 
 	public String getNome() {

@@ -1,12 +1,15 @@
 package com.cooperativismo.ApiRest.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import java.util.Date;
 
@@ -18,26 +21,35 @@ public class Pauta {
 	private Long id;
 	
 	@NotEmpty(message = "Campo título é obrigatório")
-	@NotBlank(message = "Campo título não pode estar vazio")	
+	@NotBlank(message = "Campo título não pode estar vazio")
+	@Size(max = 45, message = "Campo título excedeu limite de caracteres")
+	@Column(length = 45, nullable = false)
 	private String titulo;
 	
-	@NotEmpty(message = "Campo tempo é obrigatório")
-	@NotBlank(message = "Campo tempo não pode estar vazio")
-	@Min(value=1, message="Valor do campo tempo deve ser igual ou maior que 1")  	
-	private Integer tempo;
+	@Min(1)
+	private Integer tempo;	
 	
 	private Date data_inicio;
 		
 	private Boolean resultado;
 	
+	public Pauta() {}
+	
+    @PrePersist
+    public void onPrePesist() {
+    	if (this.tempo == null) {
+    		this.tempo = 1;
+    	}
+    }
+	
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
+	}	
+	
 	public String getTitulo() {
 		return titulo;
 	}
