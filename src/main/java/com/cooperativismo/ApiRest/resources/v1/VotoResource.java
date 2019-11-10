@@ -1,5 +1,6 @@
 package com.cooperativismo.ApiRest.resources.v1;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -35,6 +36,14 @@ public class VotoResource {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public ResponseEntity<?> create(@Valid @RequestBody Voto voto, Errors errors) {
 		if(!errors.hasErrors()) {
+		
+			Boolean votou = this.votoService.jaVotou(voto);
+			
+			if(votou) {
+				Erros erro = new Erros("Você já votou");
+				return ResponseEntity.badRequest().body(erro);				
+			}
+			
 			Voto votoCreated = this.votoService.create(voto);
 			return new ResponseEntity<Voto>(votoCreated, HttpStatus.CREATED);
 			

@@ -15,30 +15,37 @@ public class Voto {
 	private Long id;	
 	
 	@NotNull(message = "Campo associado é obrigatório ")
-	private Long associado_id;
+	@Column(name = "associado_id", nullable = false)
+	private Long associadoId;
 	
 	@NotNull(message = "Campo pauta é obrigatório")
-	private Long pauta_id;
+	@Column(name = "pauta_id", nullable = false)
+	private Long pautaId;
 	
 	@NotNull(message = "Voto não pode ser nulo")
 	private Boolean voto;
 
 	public Voto() {}
+	
+	public Long getId()
+	{
+		return this.id;
+	}
 
 	public Long getAssociado_id() {
-		return associado_id;
+		return associadoId;
 	}
 
 	public void setAssociado_id(Long associado_id) {
-		this.associado_id = associado_id;
+		this.associadoId = associado_id;
 	}
 
 	public Long getPauta_id() {
-		return pauta_id;
+		return pautaId;
 	}
 
 	public void setPauta_id(Long pauta_id) {
-		this.pauta_id = pauta_id;
+		this.pautaId = pauta_id;
 	}
 
 	public Boolean getVoto() {
