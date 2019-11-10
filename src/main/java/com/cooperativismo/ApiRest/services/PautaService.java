@@ -12,6 +12,8 @@ public interface PautaService {
 
 	public Pauta find(Long id);
 
-	public Pauta update(Long id, Pauta pauta);	
+	public Pauta update(Long id, Pauta pauta);
+
+	public Boolean secaoBloqueada(Long id);
 	
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cooperativismo.ApiRest.models.Voto;
+import com.cooperativismo.ApiRest.services.PautaService;
 import com.cooperativismo.ApiRest.services.VotoService;
 
 @RestController
@@ -25,15 +26,19 @@ public class VotoResource {
 	@Autowired
 	private VotoService votoService;
 	
-	public VotoResource(VotoService votoService)
+	@Autowired
+	private PautaService pautaService;
+	
+	public VotoResource(VotoService votoService, PautaService pautaService)
 	{
 		this.votoService = votoService;
+		this.pautaService = pautaService;
 	}
 	
 	@PostMapping
 	@ResponseBody
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public ResponseEntity<?> create(@Valid @RequestBody Voto voto, Errors errors) {
+	public ResponseEntity<?>  create(@Valid @RequestBody Voto voto, Errors errors) {
 		if(!errors.hasErrors()) {
 		
 			Boolean votou = this.votoService.jaVotou(voto);
@@ -41,6 +46,13 @@ public class VotoResource {
 			if(votou) {
 				Erros erro = new Erros("Você já votou");
 				return ResponseEntity.badRequest().body(erro);				
+			}
+			
+			Boolean secaoBloqueada = this.pautaService.secaoBloqueada(voto.getPauta_id());
+			
+			if(secaoBloqueada) {
+				Erros erro = new Erros("Seção fechada");
+				return ResponseEntity.badRequest().body(erro);
 			}
 			
 			Voto votoCreated = this.votoService.create(voto);
