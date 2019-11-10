@@ -1,6 +1,5 @@
 package com.cooperativismo.ApiRest.services;
 
-import java.util.List;
 
 import com.cooperativismo.ApiRest.models.Voto;
 

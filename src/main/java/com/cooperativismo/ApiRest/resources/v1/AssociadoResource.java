@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cooperativismo.ApiRest.models.Associado;
 import com.cooperativismo.ApiRest.services.AssociadoService;
-import com.fasterxml.jackson.core.PrettyPrinter;
+
 
 
 @RestController

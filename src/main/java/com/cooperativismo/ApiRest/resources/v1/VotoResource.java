@@ -1,6 +1,5 @@
 package com.cooperativismo.ApiRest.resources.v1;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
