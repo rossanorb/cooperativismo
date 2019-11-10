@@ -37,9 +37,14 @@ public class Pauta {
 	
     @PrePersist
     public void onPrePesist() {
+    	
     	if (this.tempo == null) {
     		this.tempo = 1;
     	}
+    	
+//    	if (this.data_inicio == null) {
+//    		this.data_inicio = new Date();
+//    	}
     }
 	
 	public Long getId() {

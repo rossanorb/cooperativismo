@@ -1,5 +1,7 @@
 package com.cooperativismo.ApiRest.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class PautaServiceImpl implements PautaService {
 	public Pauta update(Long id, Pauta pauta) {
 		Pauta pautaExists = this.pautaRepository.getOne(id);
 		
-		if(pautaExists != null) {			
+		if(pautaExists != null) {
 			pauta.setId(pautaExists.getId());
 			this.pautaRepository.save(pauta);
 			return pauta;			
@@ -41,6 +43,11 @@ public class PautaServiceImpl implements PautaService {
 	public Pauta find(Long id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Pauta> findAll() {
+		return this.pautaRepository.findAll();
 	}
 
 }
