@@ -84,7 +84,7 @@ public class PautaResource {
 						.getAllErrors()
 						.stream()
 						.map(msg -> msg.getDefaultMessage())
-						.collect(Collectors.joining(",")));			
+						.collect(Collectors.joining("\n")));			
 	}
 	
 
