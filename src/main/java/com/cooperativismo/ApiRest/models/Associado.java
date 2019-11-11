@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -38,6 +39,10 @@ public class Associado {
 	@Size(max = 20, message = "Campo cpf excedeu limite de 20 caracteres")
 	@Column(length = 20, nullable = false)
 	private String cpf;
+	
+	@Size(max = 40, message = "Campo email excedeu limite de 40 caracteres")
+	@Email
+	private String email;
 
 	public String getNome() {
 		return nome;
@@ -66,6 +71,14 @@ public class Associado {
 	@Override
 	public String toString() {
 		return "{id: " + this.id + ",name: " + this.nome + ", cpf: " + this.cpf + "}";
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

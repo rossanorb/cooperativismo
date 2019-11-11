@@ -119,7 +119,7 @@ public class PautaServiceImpl implements PautaService {
 		List<Associado> associados = this.associadoRepository.findAll();
 		
 		associados.forEach(a ->{
-			System.out.println(a.getNome());
+			System.out.println(a.getNome() +" -> " + a.getEmail() );
 		});
 		
 		
