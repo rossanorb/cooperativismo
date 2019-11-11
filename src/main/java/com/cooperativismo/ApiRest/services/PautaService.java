@@ -16,4 +16,6 @@ public interface PautaService {
 
 	public Boolean secaoBloqueada(Long id);
 	
+	public void Contabiliza(Pauta pauta);
+	
 }

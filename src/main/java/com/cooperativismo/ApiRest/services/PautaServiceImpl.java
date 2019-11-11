@@ -1,16 +1,19 @@
 package com.cooperativismo.ApiRest.services;
 
 import java.util.List;
-import java.util.TimeZone;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cooperativismo.ApiRest.models.Associado;
 import com.cooperativismo.ApiRest.models.Pauta;
+import com.cooperativismo.ApiRest.models.Voto;
+import com.cooperativismo.ApiRest.repository.AssociadoRepository;
 import com.cooperativismo.ApiRest.repository.PautaRepository;
+import com.cooperativismo.ApiRest.repository.VotoRepository;
 
-import java.text.SimpleDateFormat;
-import java.time.Instant;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,8 +23,20 @@ public class PautaServiceImpl implements PautaService {
 	@Autowired
 	private PautaRepository pautaRepository;
 	
-	public PautaServiceImpl(PautaRepository pautaRepository) {
+	@Autowired
+	private VotoRepository votoRepository;
+	
+	@Autowired
+	private AssociadoRepository associadoRepository;
+	
+	public PautaServiceImpl(
+			PautaRepository pautaRepository,
+			VotoRepository votoRepository,
+			AssociadoRepository associadoRepository
+	)
+	{
 		this.pautaRepository = pautaRepository;
+		this.votoRepository = votoRepository;
 	}
 
 	@Override
@@ -76,6 +91,38 @@ public class PautaServiceImpl implements PautaService {
         }			
 			
 		return false;
+	}
+	
+	public void Contabiliza(Pauta pauta) {
+		List<Voto> s = this.votoRepository.findByVotoAndPautaId( true, pauta.getId() );
+		Integer total_sim = s.size();
+		
+		List<Voto> n = this.votoRepository.findByVotoAndPautaId( false, pauta.getId() );
+		Integer total_nao = n.size();
+		
+		if(total_sim > total_nao ) {			
+			pauta.setResultado(true);
+		}else if(total_nao > total_sim){			
+			pauta.setResultado(false);
+		}else {
+			pauta.setResultado(null);
+		}
+		
+		this.update(pauta.getId(), pauta);
+		
+		this.mensageria(pauta);
+		
+	}
+	
+	private void mensageria(Pauta pauta)
+	{
+		List<Associado> associados = this.associadoRepository.findAll();
+		
+		associados.forEach(a ->{
+			System.out.println(a.getNome());
+		});
+		
+		
 	}
 
 }

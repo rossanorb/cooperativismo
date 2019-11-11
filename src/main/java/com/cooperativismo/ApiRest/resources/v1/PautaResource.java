@@ -69,12 +69,19 @@ public class PautaResource {
 	
 	}
 	
-	@GetMapping("/inicia/{id}")
+	@GetMapping("/inicia/{id}")	
 	public void Inicia( @PathVariable( value="id" ) Long id, @Valid @RequestBody Pauta pauta  ){
 		
 		Date data_inicio = new Date();
 		pauta.setData_inicio(data_inicio);
 		this.pautaService.update(id, pauta);
+	}
+	
+	@GetMapping("/encerra/{id}")	
+	public void Encerra( @PathVariable( value="id" ) Long id  )
+	{
+		Pauta pauta = this.pautaService.find(id);
+		this.pautaService.Contabiliza(pauta);
 	}
 	
 	private ResponseEntity<?> getErrors(Errors errors) {
