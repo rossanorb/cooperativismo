@@ -18,4 +18,6 @@ public interface PautaService {
 	
 	public void Contabiliza(Pauta pauta);
 	
+	public String autorizaCFP(Long id);
+	
 }

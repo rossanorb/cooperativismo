@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.cooperativismo.ApiRest.models.Associado;
 import com.cooperativismo.ApiRest.models.Pauta;
@@ -12,10 +13,13 @@ import com.cooperativismo.ApiRest.models.Voto;
 import com.cooperativismo.ApiRest.repository.AssociadoRepository;
 import com.cooperativismo.ApiRest.repository.PautaRepository;
 import com.cooperativismo.ApiRest.repository.VotoRepository;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Calendar;
 import java.util.Date;
+
+
 
 @Service
 public class PautaServiceImpl implements PautaService {
@@ -91,6 +95,19 @@ public class PautaServiceImpl implements PautaService {
         }			
 			
 		return false;
+	}
+	
+	public String autorizaCFP(Long id)
+	{
+		Associado associado = this.associadoRepository.getOne(id);
+		
+		String acpf = associado.getCpf();
+		String cpf = acpf.replace(".","").replace("-","");
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String result = restTemplate.getForObject("https://user-info.herokuapp.com/users/{cpf}", String.class , cpf);	
+				
+		return result;
 	}
 	
 	public void Contabiliza(Pauta pauta) {

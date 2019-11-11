@@ -5,6 +5,6 @@ import com.cooperativismo.ApiRest.models.Associado;
 
 public interface AssociadoService {
 	public List<Associado> findAll();
-	public Associado find();
+	public Associado find(Long id);
 	public Associado create(Associado associado);
 }

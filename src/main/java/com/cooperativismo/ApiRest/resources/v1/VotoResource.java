@@ -1,5 +1,6 @@
 package com.cooperativismo.ApiRest.resources.v1;
 
+import java.io.IOException;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -15,9 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.cooperativismo.ApiRest.models.Voto;
 import com.cooperativismo.ApiRest.services.PautaService;
 import com.cooperativismo.ApiRest.services.VotoService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 @RestController
 @RequestMapping("/v1/votos")
@@ -38,9 +43,22 @@ public class VotoResource {
 	@PostMapping
 	@ResponseBody
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public ResponseEntity<?>  create(@Valid @RequestBody Voto voto, Errors errors) {
-		if(!errors.hasErrors()) {
-		
+	public ResponseEntity<?>  create(@Valid @RequestBody Voto voto, Errors errors) throws IOException {
+		if(!errors.hasErrors()) {	
+			
+			String result = this.pautaService.autorizaCFP(voto.getAssociado_id());
+			
+			ObjectMapper objectMapper = new ObjectMapper();
+			JsonNode jsonNode  = objectMapper.readValue(result,  JsonNode.class);
+			
+			String status = jsonNode.get("status").textValue();
+			
+			if( status.trim().equals("UNABLE_TO_VOTE") ) {
+				Erros erro = new Erros("CPF não está autorizado");
+				System.out.println( "CPF não está autorizado" );
+				return ResponseEntity.badRequest().body(erro);
+			}
+			
 			Boolean votou = this.votoService.jaVotou(voto);
 			
 			if(votou) {
