@@ -4,7 +4,6 @@ import java.util.List;
 import com.cooperativismo.ApiRest.models.Associado;
 
 public interface AssociadoService {
-	public List<Associado> findAll();
-	public Associado find(Long id);
+	public List<Associado> findAll();	
 	public Associado create(Associado associado);
 }

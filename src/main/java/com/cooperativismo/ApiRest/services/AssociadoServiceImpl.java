@@ -24,12 +24,6 @@ public class AssociadoServiceImpl implements AssociadoService{
 	}
 
 	@Override
-	public Associado find() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Associado create(Associado associado) { 
 		this.associadoRepository.save(associado);
 		return associado;
