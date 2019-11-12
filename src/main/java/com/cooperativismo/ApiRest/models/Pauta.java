@@ -11,6 +11,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 @Entity
@@ -29,6 +31,7 @@ public class Pauta {
 	@Min(1)
 	private Integer tempo;	
 	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date data_inicio;
 		
 	private Boolean resultado;
