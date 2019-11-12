@@ -49,7 +49,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nome\" : \"Vanessa\",\n\t\"cpf\" : \"404.517.580-64\",\n\t\"email\" : \"vanessa@terra.com.br\"\n}",
+					"raw": "{\n\t\"nome\" : \"Rossano\",\n\t\"cpf\" : \"404.517.580-64\",\n\t\"email\" : \"vanessa@terra.com.br\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -85,7 +85,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"titulo\" : \"Pauta sobre novo registro de entrada do condomínio!\",\n\t\"tempo\" : null,\n\t\"data_inicio\" : null,\n\t\"resultado\": null\n}"
+					"raw": "{\n\t\"titulo\" : \"Aumento do salario dos servidores\",\n\t\"tempo\" : 60\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/v1/pautas",
@@ -191,7 +191,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"pauta_id\": 4,\n\t\"associado_id\": 2,\n\t\"voto\": true\n}",
+					"raw": "{\n\t\"pauta_id\": 4,\n\t\"associado_id\": 4,\n\t\"voto\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
