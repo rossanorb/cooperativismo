@@ -23,7 +23,10 @@ import com.cooperativismo.ApiRest.services.VotoService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(value = "API REST - Model Voto")
 @RestController
 @RequestMapping("/v1/votos")
 public class VotoResource {
@@ -40,6 +43,7 @@ public class VotoResource {
 		this.pautaService = pautaService;
 	}
 	
+	@ApiOperation(value = "Vota na pauta")
 	@PostMapping
 	@ResponseBody
 	@ResponseStatus(code = HttpStatus.CREATED)

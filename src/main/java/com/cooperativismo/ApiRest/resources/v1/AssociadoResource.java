@@ -46,13 +46,7 @@ public class AssociadoResource {
 	public List<Associado> findAll(){
 		return this.associadoService.findAll();
 	}
-	
-	@GetMapping(value = "/{id}")
-	@ResponseBody	
-	public Associado find(@PathVariable(value = "id") Long id) {
-		return null;
-	}
-	
+
 	@ApiOperation(value = "Cria associado")
 	@PostMapping
 	@ResponseBody
@@ -81,7 +75,7 @@ public class AssociadoResource {
 						.getAllErrors()
 						.stream()
 						.map(msg -> msg.getDefaultMessage())
-						.collect(Collectors.joining(",")));			
+						.collect(Collectors.joining("\n")));			
 	}	
 	
 }

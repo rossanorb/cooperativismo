@@ -13,6 +13,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
 @Entity
@@ -31,9 +33,11 @@ public class Pauta {
 	@Min(1)
 	private Integer tempo;	
 	
+	@ApiModelProperty(hidden = true)
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date data_inicio;
-		
+
+	@ApiModelProperty(hidden = true)
 	private Boolean resultado;
 	
 	public Pauta() {}

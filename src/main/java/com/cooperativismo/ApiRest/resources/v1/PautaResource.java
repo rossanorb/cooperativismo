@@ -22,8 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cooperativismo.ApiRest.models.Pauta;
 import com.cooperativismo.ApiRest.services.PautaService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
+
 import java.util.Date;
 
+@Api(value = "API REST - Model Pauta")
 @RestController
 @RequestMapping("/v1/pautas")
 public class PautaResource {
@@ -36,6 +42,7 @@ public class PautaResource {
 		this.pautaService = pautaService;
 	}
 	
+	@ApiOperation(value = "Lista todas as pautas")
 	@GetMapping(produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<?> findAll(){
@@ -43,6 +50,7 @@ public class PautaResource {
 		return new ResponseEntity<List>(list, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Cria uma nova pauta")	
 	@PostMapping
 	@ResponseBody
 	@ResponseStatus(code = HttpStatus.CREATED)
@@ -69,6 +77,7 @@ public class PautaResource {
 	
 	}
 	
+	@ApiOperation(value = "Inicia Pauta")
 	@GetMapping("/inicia/{id}")	
 	public void Inicia( @PathVariable( value="id" ) Long id, @Valid @RequestBody Pauta pauta  ){
 		
@@ -77,6 +86,7 @@ public class PautaResource {
 		this.pautaService.update(id, pauta);
 	}
 	
+	@ApiOperation(value = "Encerra a pauta")
 	@GetMapping("/encerra/{id}")	
 	public void Encerra( @PathVariable( value="id" ) Long id  )
 	{
