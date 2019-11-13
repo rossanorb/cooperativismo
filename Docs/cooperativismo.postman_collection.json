@@ -49,7 +49,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nome\" : \"Rossano\",\n\t\"cpf\" : \"404.517.580-64\",\n\t\"email\" : \"vanessa@terra.com.br\"\n}",
+					"raw": "{\n\t\"nome\" : \"Rossano\",\n\t\"cpf\" : \"404.517.580-64\",\n\t\"email\" : \"rossanorb@gmail.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
