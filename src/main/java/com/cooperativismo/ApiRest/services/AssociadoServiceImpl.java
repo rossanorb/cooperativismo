@@ -29,4 +29,15 @@ public class AssociadoServiceImpl implements AssociadoService{
 		return associado;
 	}
 
+	@Override
+	public Boolean ExistsCpf(String cpf) {
+		Associado associado = this.associadoRepository.findByCpf(cpf);
+		
+		if( associado instanceof Associado  ) {
+			return true;
+		}
+				
+		return false;
+	}
+
 }

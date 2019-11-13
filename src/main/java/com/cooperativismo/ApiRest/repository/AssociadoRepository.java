@@ -7,5 +7,5 @@ import com.cooperativismo.ApiRest.models.Associado;
 
 @Repository
 public interface AssociadoRepository extends JpaRepository<Associado, Long >{
-
+	public Associado findByCpf(String cpf);
 }

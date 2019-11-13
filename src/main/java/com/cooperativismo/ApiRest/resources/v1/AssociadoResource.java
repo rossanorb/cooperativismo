@@ -56,6 +56,13 @@ public class AssociadoResource {
 				
 		try {
 			if(!errors.hasErrors()) {
+				
+				boolean existsCpf = this.associadoService.ExistsCpf(associado.getCpf());
+				if(existsCpf) {
+					Erros erro = new Erros("CPF já existe");
+					return ResponseEntity.badRequest().body(erro);
+				}				
+				
 				Associado associadoCreated = this.associadoService.create(associado);
 				return new ResponseEntity<Associado>(associadoCreated, HttpStatus.CREATED);
 			}

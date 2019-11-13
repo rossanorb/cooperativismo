@@ -6,4 +6,5 @@ import com.cooperativismo.ApiRest.models.Associado;
 public interface AssociadoService {
 	public List<Associado> findAll();	
 	public Associado create(Associado associado);
+	public Boolean ExistsCpf(String cpf);
 }
