@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cooperativismo.ApiRest.models.Associado;
 import com.cooperativismo.ApiRest.services.AssociadoService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
-
+@Api(value = "API REST - Model Associado")
 @RestController
 @RequestMapping("/v1/associados")
 public class AssociadoResource {
@@ -38,7 +40,8 @@ public class AssociadoResource {
 		this.associadoService = associadoService;
 	}
 	
-	@GetMapping
+	@ApiOperation(value = "Lista todos os associados")
+	@GetMapping(produces = "application/json")
 	@ResponseBody
 	public List<Associado> findAll(){
 		return this.associadoService.findAll();
@@ -50,6 +53,7 @@ public class AssociadoResource {
 		return null;
 	}
 	
+	@ApiOperation(value = "Cria associado")
 	@PostMapping
 	@ResponseBody
 	@ResponseStatus(code = HttpStatus.CREATED)
