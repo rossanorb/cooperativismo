@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.cooperativismo.ApiRest.models.Associado;
+import com.cooperativismo.ApiRest.models.Mensageria;
 import com.cooperativismo.ApiRest.models.Pauta;
 import com.cooperativismo.ApiRest.models.Voto;
 import com.cooperativismo.ApiRest.repository.AssociadoRepository;
@@ -20,6 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
+import com.cooperativismo.ApiRest.services.RabbitMQSenderService;
 
 @Service
 public class PautaServiceImpl implements PautaService {
@@ -32,6 +34,9 @@ public class PautaServiceImpl implements PautaService {
 	
 	@Autowired
 	private AssociadoRepository associadoRepository;
+	
+	@Autowired
+	RabbitMQSenderService rabbitMQSenderService;	
 	
 	public PautaServiceImpl(
 			PautaRepository pautaRepository,
@@ -131,14 +136,27 @@ public class PautaServiceImpl implements PautaService {
 		
 	}
 	
+	/************************************************
+	 *  Coloca mensagens em uma fila usando RabbitMQ
+	 ************************************************* */
 	private void mensageria(Pauta pauta)
 	{
 		List<Associado> associados = this.associadoRepository.findAll();
 		
-		associados.forEach(a ->{
-			System.out.println(a.getNome() +" -> " + a.getEmail() );
-		});
+		Mensageria mensageria = new Mensageria();
 		
+		associados.forEach(a ->{
+			
+			System.out.println(a.getNome() +" -> " + a.getEmail() );
+			
+			mensageria.setTitulo(pauta.getTitulo());
+			mensageria.setResultado(pauta.getResultado());
+			mensageria.setNome(a.getNome());
+			mensageria.setEmail(a.getEmail());
+			
+			this.rabbitMQSenderService.send(mensageria);
+			
+		});		
 		
 	}
 
