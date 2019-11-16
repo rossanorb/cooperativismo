@@ -4,6 +4,8 @@
 
 # Na pasta Docs está o schema do banco em MySql 5.7
 
+# Aplicação usa RabbitMq para mensageria
+
 # Na pasta Docs também consta arquivo json do Postman com chamadas rest, basta importar para o Postman
 
 

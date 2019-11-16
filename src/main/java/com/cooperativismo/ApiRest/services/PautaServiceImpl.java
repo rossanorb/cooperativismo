@@ -14,8 +14,6 @@ import com.cooperativismo.ApiRest.models.Voto;
 import com.cooperativismo.ApiRest.repository.AssociadoRepository;
 import com.cooperativismo.ApiRest.repository.PautaRepository;
 import com.cooperativismo.ApiRest.repository.VotoRepository;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Calendar;
 import java.util.Date;
